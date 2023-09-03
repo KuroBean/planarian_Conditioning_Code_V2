@@ -32,4 +32,6 @@ void loop() {
   // put your main code here, to run repeatedly:
 Serial.println("START_RECORDING");
   delay(10000);
+  Serial.println("STOP_RECORDING");
+  delay(10000);
 }
