@@ -26,8 +26,12 @@ def start_recording():
     cap.set(3,width)
     cap.set(4,height)
 
-    fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-    out = cv2.VideoWriter('output.mp4', fourcc, 20.0, (width,height))
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+ 
+    output_filename = f'output_{video_counter}.mp4' 
+     
+
+    out = cv2.VideoWriter(output_filename, fourcc, 20.0, (width,height))
     # Define the recording duration in seconds
 
     # Start recording
