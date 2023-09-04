@@ -24,7 +24,7 @@ ser = serial.Serial('COM3', 9600)  # Adjust the COM port and baud rate
 
 while True:
     # Read data from Arduino
-    data = ser.readline().decode().strip()
+    data = ser.readline().decode().strip()#seems to only have value for every new msg, then when no activity, is waiting for new msg
     print("running")
     # Process the received data
     if data == "START_RECORDING":
