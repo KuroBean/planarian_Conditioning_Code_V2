@@ -70,7 +70,7 @@ while True:
      
 
     out = cv2.VideoWriter(output_filename, fourcc, 30.0, (width,height))
-
+    #needs 7 sec of idle time to set up camera before starting recording
     data = ser.readline().decode().strip()#seems to WAIT for new msg
     print(f"Received: {data}")
     # Process the received data
