@@ -17,6 +17,11 @@ int count = 0;
 #define recordNum 20 //how many recordings 
 #define waitMinute 2 //wait time between trials (in minutes)
 
+void record(){
+  Serial.println("START_RECORDING");
+  delay(1000*5.73669);
+}
+
 void setup() {
   // put your setup code here, to run once:
   pinMode(uv, OUTPUT);
@@ -31,5 +36,9 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 Serial.println("START_RECORDING");
-  delay(7000);
+digitalWrite(led,HIGH);
+  delay(10000);
+  Serial.println("STOP_RECORDING");
+  digitalWrite(led,LOW);
+  delay(15000);
 }
