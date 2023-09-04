@@ -34,7 +34,7 @@ def start_recording():
 
         # Check if the recording duration has been reached
         
-        if time.time()-start_time >= record_duration+0.5:
+        if time.time()-start_time >= record_duration+1.2:
             break
 
     # Release video capture and writer objects
