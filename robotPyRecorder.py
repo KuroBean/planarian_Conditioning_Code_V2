@@ -1,8 +1,9 @@
 import serial
 import pyautogui
-
+import time
 # Initialize the recording flag
 is_recording = False
+duration=3
 pyautogui.moveTo(2510,480)
 # Function to start recording
 def start_recording():
@@ -10,18 +11,13 @@ def start_recording():
     is_recording = True
     
     pyautogui.click()
-    while is_recording:
-        data = ser.readline().decode().strip()
-        if data == "STOP_RECORDING":
-            is_recording=False
-        # Break the loop on a key press (e.g., 'q') or if not recording
-        if not is_recording:
+    startTime=time.time()
+    while True:
+        if time.time()-startTime>=duration+0.5:
             break
-    
-
-# Function to stop recording
-def stop_recording():
     pyautogui.click()
+        
+
 
 # Open the serial port connection to the Arduino
 ser = serial.Serial('COM3', 9600)  # Adjust the COM port and baud rate
@@ -33,7 +29,6 @@ while True:
     # Process the received data
     if data == "START_RECORDING":
         start_recording()
-    elif data == "STOP_RECORDING":
-        stop_recording()
+
 
 ser.close()
