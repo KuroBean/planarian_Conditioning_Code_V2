@@ -15,7 +15,26 @@ def start_recording():
     is_recording = True
     print("starting recording")
     # Increment the video counter
-    
+    video_counter += 1
+    # Define the video capture device (0 for default camera)
+    cap = cv2.VideoCapture(0)
+
+    # Check if the camera opened successfully
+    if not cap.isOpened():
+        print("Error: Could not open camera.")
+        exit()
+
+    height=720
+    width=1280
+    cap.set(3,width)
+    cap.set(4,height)
+
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+ 
+    output_filename = f'output_{video_counter}.mp4' 
+     
+
+    out = cv2.VideoWriter(output_filename, fourcc, 30.0, (width,height))
     # Define the recording duration in seconds
 
     # Start recording
@@ -26,7 +45,7 @@ def start_recording():
 
     while True:
         ret, frame = cap.read()
-        print(ret)
+        #print(ret)
         if not ret:
             break
         #cv2.imshow('Camera Feed', frame)
@@ -48,33 +67,15 @@ def start_recording():
     cv2.destroyAllWindows()
 # Open the serial port connection to the Arduino
 ser = serial.Serial('COM3', 9600)  # Adjust the COM port and baud rate
-
+counter=0
 while True:
+    counter=counter+1
+    print(f"cycle count: {counter}")
     # Read data from Arduino
     data = ser.readline().decode().strip()
     print(f"Received: {data}")
     # Process the received data
-
-    video_counter += 1
-    # Define the video capture device (0 for default camera)
-    cap = cv2.VideoCapture(0)
-
-    # Check if the camera opened successfully
-    if not cap.isOpened():
-        print("Error: Could not open camera.")
-        exit()
-
-    height=720
-    width=1280
-    cap.set(3,width)
-    cap.set(4,height)
-
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
- 
-    output_filename = f'output_{video_counter}.mp4' 
-
-    out = cv2.VideoWriter(output_filename, fourcc, 30.0, (width,height))
-
+    
     if data == "START_RECORDING":
         startLagTime=time.time()
         start_recording()
